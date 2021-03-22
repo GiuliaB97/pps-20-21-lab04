@@ -65,12 +65,19 @@ object Lists extends App {
     def foldRight[A,B](l: List[A])(acc: B)(f: (A,B)=>B): B =
       foldRightViaFoldleft(l)(acc)(f)
 
-    def filterByFlatmap[A](l: List[A])(f: A => Boolean): List[A] = ???
+    //TO-DO
+     def filterByFlatmap[A](l: List[A])(f: A => Boolean): List[A] = flatMap(l)({
+       case a if (f(a)) => Cons(a, Nil())
+       case _ => Nil ()
+     })
 
-    def appendByFold[A](l1: List[A], l2: List[A]): List[A] = ???
+    def appendByFold[A](l1: List[A], l2: List[A]): List[A] = foldRight(l1) (l2)(Cons(_,_))
 
-    def length(l: List[_]): Int = ???
+    def length(l: List[_]): Int = foldRight(l) (0)((_,acc) => acc + 1)
+
+    def contain[A](l: List[A], e:A): Boolean = if (filter(l) (a=> a==e)==Nil()) false else true
   }
+
 
   // Note "List." qualification
   println(List.sum(List.Cons(10, List.Cons(20, List.Cons(30, List.Nil()))))) // 60
@@ -98,4 +105,5 @@ object Lists extends App {
   println(appendByFold(Cons(3,Cons(7,Nil())), Cons(1,Cons(5,Nil())))) // Cons(3,Cons(7,Cons(1,Cons(5, Nil()))))
   println(length(Nil())) // 0
   println(length(Cons(3,Cons(7,Cons(1,Cons(5, Nil())))))) // 4
+
 }
