@@ -23,14 +23,17 @@ trait Course {
   def name: String
   def teacher: String
 }
-case class CaseCourse(name:String, teacher:String)
-
+//case class CaseCourse(name:String, teacher:String)
+class CourseImpl(
+                  override val name: String,
+                  override val  teacher: String,
+                )extends Course
 object Student {
-  def apply(name: String, year: Int = 2017): Student = ???
+  def apply(name: String, year: Int = 2017): Student = new StudentImpl(name, year)
 }
 
 object Course {
-  def apply(name: String, teacher: String): Course = ???
+  def apply(name: String, teacher: String): Course = new CourseImpl(name, teacher)
 }
 
 object Try extends App {
