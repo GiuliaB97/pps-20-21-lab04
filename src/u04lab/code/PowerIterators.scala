@@ -1,7 +1,7 @@
 package u04lab.code
 
-import Optionals._
-import Lists._
+import u04lab.code.Lists._
+import u04lab.code.Optionals._
 
 trait PowerIterator[A] {
   def next(): Option[A]
@@ -10,7 +10,6 @@ trait PowerIterator[A] {
 }
 
 trait PowerIteratorsFactory {
-
   def incremental(start: Int, successive: Int => Int): PowerIterator[Int]
   def fromList[A](list: List[A])
   def randomBooleans(size: Int): PowerIterator[Boolean]
