@@ -19,7 +19,8 @@ object Lists extends App {
       case _ => 0
     }
 
-    def append[A](l1: List[A], l2: List[A]): List[A] = (l1, l2) match {
+    def append[A](l1: List[A], l2: List[A]): List[A] =
+      (l1, l2) match {
       case (Cons(h, t), l2) => Cons(h, append(t, l2))
       case _ => l2
     }
@@ -67,7 +68,7 @@ object Lists extends App {
 
     //TO-DO
      def filterByFlatmap[A](l: List[A])(f: A => Boolean): List[A] = flatMap(l)({
-       case a if (f(a)) => Cons(a, Nil())
+       case a if f(a) => Cons(a, Nil())
        case _ => Nil ()
      })
 
@@ -75,7 +76,17 @@ object Lists extends App {
 
     def length(l: List[_]): Int = foldRight(l) (0)((_,acc) => acc + 1)
 
-    def contain[A](l: List[A], e:A): Boolean = if (filter(l) (a=> a==e)==Nil()) false else true
+    def contain[A](l: List[A], e:A): Boolean = l match{
+      case Cons(h, t) if (h==e) => true
+      case Cons(h, t) => contain(t, e)
+      case Nil() => false
+    }
+
+    def zipWith[A, B, C](a: List[A], b: List[B])(f: (A, B) => C): List[C] = (a, b) match {
+      case (Nil(), _) => Nil()
+      case (_, Nil()) => Nil()
+      case (Cons(h1, t1), Cons(h2, t2)) => Cons(f(h1, h2), zipWith(t1, t2)(f))
+    }
   }
 
 
@@ -102,8 +113,15 @@ object Lists extends App {
   // EXERCISES:
   println(filterByFlatmap(Cons(10, Cons(20, Nil())))(_>15)) // Cons(20, Nil())
   println(filterByFlatmap(Cons("a", Cons("bb", Cons("ccc", Nil()))))( _.length <=2)) // Cons("a",Cons("bb", Nil()))
-  println(appendByFold(Cons(3,Cons(7,Nil())), Cons(1,Cons(5,Nil())))) // Cons(3,Cons(7,Cons(1,Cons(5, Nil()))))
+  println("APPEND BY FOLD"+appendByFold(Cons(3,Cons(7,Nil())), Cons(1,Cons(5,Nil())))) // Cons(3,Cons(7,Cons(1,Cons(5, Nil()))))
+  println("APPEND BY FOLD"+appendByFold(Nil(), Cons(1,Cons(5,Nil())))) // Cons(3,Cons(7,Cons(1,Cons(5, Nil()))))
+  println("APPEND BY FOLD"+appendByFold(Cons(3,Cons(7,Nil())),Nil())) // Cons(3,Cons(7,Cons(1,Cons(5, Nil()))))
   println(length(Nil())) // 0
   println(length(Cons(3,Cons(7,Cons(1,Cons(5, Nil())))))) // 4
 
+
+
+  //online ex
+
+  println(zipWith(Cons("a",Cons( "b",(Cons("c", Nil())))), Cons("A",Cons( "B",(Cons("C", Nil())))))(_ + _) )
 }

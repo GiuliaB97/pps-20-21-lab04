@@ -43,7 +43,7 @@ class ComplexTest {
   }
 
   @Test def testToString(): Unit = {
-    //assertEquals("CaseComplex(1.0,1.0)", Complex(1, 1))               //non funziona
-    assertNotEquals("ComplexImpl(1.0, 1.0)", Complex2(1, 1))
+    assertEquals("CaseComplex(1.0,1.0)", Complex(1, 1).toString)               //non funziona
+    assertEquals("ComplexImpl(1.0, 1.0)", Complex2(1, 1).toString)
   }
 }

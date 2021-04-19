@@ -24,7 +24,7 @@ class ComplexImpl(  override val re: Double,
         im == that.im
     case _ => false
   }
-
+  //se ci metto questo il test passa
   override def toString = s"ComplexImpl($re, $im)"
 
   override def hashCode(): Int = {

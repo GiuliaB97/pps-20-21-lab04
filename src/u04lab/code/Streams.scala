@@ -58,6 +58,10 @@ object Streams extends App {
 
     def generate[A](next: => A): Stream[A] = cons(next, generate(next))
 
+    def drop[A](stream: Stream[A])(n: Int): Stream[A] = stream match {
+      case Cons(_, t) if n>0 => drop(t())(n-1)
+      case _ => stream
+    }
   }
 
   import Stream._
@@ -79,6 +83,5 @@ object Streams extends App {
 
   val corec: Stream[Int] = Stream.cons(1, corec) // {1,1,1,..}
   println(Stream.toList(Stream.take(corec)(10))) // [1,1,..,1]
-
 */
 }

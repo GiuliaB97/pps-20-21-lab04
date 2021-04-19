@@ -2,8 +2,7 @@ package u04lab.code
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import u04lab.code.Lists.List.{Cons, Nil, appendByFold, filterByFlatmap, length}
-
+import u04lab.code.Lists.List._
 class ListTest {
   @Test
   def testFilterByFlatmap(): Unit = {
@@ -28,4 +27,5 @@ class ListTest {
     assertEquals(length(v1), 4)
     assertEquals(length(v2), 0)
   }
+
 }
