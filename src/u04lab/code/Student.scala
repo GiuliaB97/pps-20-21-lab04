@@ -59,3 +59,6 @@ object Try extends App {
  * - check that the two println above work correctly
  * - refactor the code so that method enrolling accepts a variable argument Course*
  */
+/*
+Implement an extractor sameTeacher(t) on a list of Courses that extracts the teacher t in common to all courses (if any)
+ */

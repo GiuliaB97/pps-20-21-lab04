@@ -2,6 +2,7 @@ package u04lab.code
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import u04lab.code.Lists.List.{Cons, Nil}
 
 class StudentTest {
   val cPPS = Course("PPS","Viroli")
@@ -10,44 +11,42 @@ class StudentTest {
   val s1 = Student("mario",2015)
   val s2 = Student("gino",2016)
   val s3 = Student("rino") //defaults to 2017
+  s1.enrolling(cPPS)
+  s1.enrolling(cPCD)
+  s2.enrolling(cSDR)
 
   @Test
   def testCreateCourse(): Unit = {
     assertEquals(cPPS, Course("PPS","Viroli"))
     assertEquals(cPCD, Course("PCD","Ricci"))
     assertEquals(cSDR, Course("SDR","D'Angelo"))
+    assertEquals("SDR", cSDR.name)
+    assertEquals("D'Angelo", cSDR.teacher)
   }
 
   @Test
   def testCreateStudent(): Unit = {
     assertEquals(s1, Student("mario",2015))
     assertEquals(s2, Student("gino",2016))
-    assertEquals(s3, Student("rino",2017))//test default value
+    assertEquals(s3, Student("rino"))//test default value
+    assertEquals(s3.name, "rino")
+    assertEquals(s3.year, 2017)
   }
 
   @Test
   def testEnrolling(): Unit = {
-    s1.enrolling(cPPS)
-    //assertEquals(s1, Cons(PCD,Nil()))
-    s1.enrolling(cPCD)
-    //assertEquals(s1, Cons(PCD,Cons(PPS,Nil())))
-    s2.enrolling(cPPS)
-    //assertEquals(s2, Cons(PPS,Nil()))
-    s3.enrolling(cPPS)
-    //assertEquals(s3, Cons(PPS,Nil()))
-    s3.enrolling(cPCD)
-    //assertEquals(s3, Cons(PPS,Cons(PCD,Nil())))
-    s3.enrolling(cSDR)
-    //assertEquals(s3,Cons(SDR,Cons(PCD,Cons(PPS,Nil())))
+    assertEquals(Cons("PCD", Cons("PPS", Nil())), s1.courses)
+    assertEquals( Cons("SDR", Nil()), s2.courses)
+    assertEquals(Nil(), s3.courses)
   }
 
   @Test
   def testHasTeacher(): Unit = {
-    assertEquals(s1.hasTeacher("Ricci"), true) // true
+    assertEquals(s1.hasTeacher("Ricci"), true)
     assertEquals(s1.hasTeacher("D'Angelo"), false)
-    assertEquals(s2.hasTeacher("Viroli"), true)
-    assertEquals(s2.hasTeacher("Ricci"), false)
-    assertEquals(s3.hasTeacher("Viroli"), true)
+    assertEquals(s2.hasTeacher("Viroli"), false)
+    assertEquals(s2.hasTeacher("D'Angelo"), true)
+    assertEquals(s3.hasTeacher("Viroli"), false)
     assertEquals(s3.hasTeacher("Bravetti"), false)
   }
 
