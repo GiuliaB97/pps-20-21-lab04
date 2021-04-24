@@ -11,7 +11,6 @@ trait Student {
   def enrolling(course: Course): Unit // the student participates to a Course
   def courses: List[String] // names of course the student participates to
   def hasTeacher(teacher: String): Boolean // is the student participating to a course of this teacher?
- // def sameTeacher(courses: List[Course]): Option[String] // extractor on a list of Courses that extracts the teacher t in common to all courses (if any)
 }
 
 trait Course {
@@ -40,7 +39,7 @@ object sameTeacher {
     val teachers: List[String] = map(courses)(course => course.teacher)
     var prev: String=""
     @tailrec
-    def _sameTeacher(list: List[String]): Option[String] = list match {     //non puoi passare prev come argomento della funzione perchè di default sono val
+    def _sameTeacher(list: List[String]): Option[String] = list match { //non puoi passare prev come argomento della funzione perchè di default sono val
       case Cons(h, t) => if(prev=="") prev=h; _sameTeacher(t)
       case Cons(h, t) => if (prev==h) _sameTeacher(t) else None
       case _ =>  Some(prev)
