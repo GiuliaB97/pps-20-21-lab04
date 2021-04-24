@@ -38,6 +38,7 @@ object sameTeacher {
   def sameTeacher(courses: List[Course]): Option[String] = {
     val teachers: List[String] = map(courses)(course => course.teacher)
     var prev: String=""
+
     @tailrec
     def _sameTeacher(list: List[String]): Option[String] = list match { //non puoi passare prev come argomento della funzione perchè di default sono val
       case Cons(h, t) => if(prev=="") prev=h; _sameTeacher(t)

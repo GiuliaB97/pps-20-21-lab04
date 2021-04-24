@@ -54,11 +54,9 @@ class StudentTest {
   }
 
   @Test
-  def testHasExtractor(): Unit ={
+  def testExtractor(): Unit ={
     assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list1))
     assertNotEquals(Option.empty, sameTeacher.sameTeacher(list2))
     //assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list3))
   }
-
-
 }
