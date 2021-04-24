@@ -1,19 +1,22 @@
 package u04lab.code
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.{assertEquals, assertNotEquals}
 import org.junit.jupiter.api.Test
 import u04lab.code.Lists.List.{Cons, Nil}
-
 class StudentTest {
   val cPPS = Course("PPS","Viroli")
   val cPCD = Course("PCD","Ricci")
   val cSDR = Course("SDR","D'Angelo")
+  val cSEIOT =Course("SEIOT","RICCI")
   val s1 = Student("mario",2015)
   val s2 = Student("gino",2016)
   val s3 = Student("rino") //defaults to 2017
   s1.enrolling(cPPS)
   s1.enrolling(cPCD)
   s2.enrolling(cSDR)
+  //s1.enrolling(cSEIOT)
+  val list1 = Cons(cPCD, Cons(cSEIOT, Nil()))
+  val list2 = Cons(cPCD, Cons(cPPS, Nil()))
 
   @Test
   def testCreateCourse(): Unit = {
@@ -50,4 +53,9 @@ class StudentTest {
     assertEquals(s3.hasTeacher("Bravetti"), false)
   }
 
+  @Test
+  def testHasEstractor(): Unit ={
+    assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list1))
+    assertNotEquals(Option.empty, sameTeacher.sameTeacher(list2))
+  }
 }

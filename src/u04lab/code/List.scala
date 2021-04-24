@@ -77,8 +77,8 @@ object Lists extends App {
     def length(l: List[_]): Int = foldRight(l) (0)((_,acc) => acc + 1)
 
     def contain[A](l: List[A], e:A): Boolean = l match{
-      case Cons(h, t) if (h==e) => true
-      case Cons(h, t) => contain(t, e)
+      case Cons(h, _) if (h==e) => true
+      case Cons(_, t) => contain(t, e)
       case Nil() => false
     }
 
