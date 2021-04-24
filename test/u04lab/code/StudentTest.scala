@@ -16,6 +16,7 @@ class StudentTest {
   s2.enrolling(cSDR)
   val list1 = Cons(cPCD, Cons(cSEIOT, Nil()))
   val list2 = Cons(cPCD, Cons(cPPS, Nil()))
+  val list3 = List(cPCD, cSEIOT)
 
   @Test
   def testCreateCourse(): Unit = {
@@ -53,8 +54,11 @@ class StudentTest {
   }
 
   @Test
-  def testHasEstractor(): Unit ={
+  def testHasExtractor(): Unit ={
     assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list1))
     assertNotEquals(Option.empty, sameTeacher.sameTeacher(list2))
+    //assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list3))
   }
+
+
 }
