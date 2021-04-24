@@ -14,7 +14,6 @@ class StudentTest {
   s1.enrolling(cPPS)
   s1.enrolling(cPCD)
   s2.enrolling(cSDR)
-  //s1.enrolling(cSEIOT)
   val list1 = Cons(cPCD, Cons(cSEIOT, Nil()))
   val list2 = Cons(cPCD, Cons(cPPS, Nil()))
 
