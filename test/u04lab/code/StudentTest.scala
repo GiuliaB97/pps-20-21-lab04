@@ -52,11 +52,17 @@ class StudentTest {
     assertEquals(s3.hasTeacher("Viroli"), false)
     assertEquals(s3.hasTeacher("Bravetti"), false)
   }
-
+/*
+    Errore:
+    type mismatch;
+    found   : List[u04lab.code.Course]
+    required: u04lab.code.Lists.List[u04lab.code.Course]
+    assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list3))
+ */
   @Test
   def testExtractor(): Unit ={
     assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list1))
     assertNotEquals(Option.empty, sameTeacher.sameTeacher(list2))
-    //assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list3))
+    //assertEquals(Option("Ricci"), sameTeacher.sameTeacher(list3))     //lista creata come factory
   }
 }
