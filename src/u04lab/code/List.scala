@@ -1,6 +1,7 @@
   package u04lab.code
 
   import scala.annotation.tailrec
+  import Streams._
 
   object Lists extends App {
 
@@ -13,13 +14,18 @@
       case class Cons[E](head: E, tail: List[E]) extends List[E]
       case class Nil[E]() extends List[E]
 
+      def nil[A]: List[A] = Nil() // smart constructor
+
       def apply[A](items:A*): List[A]= {
         var list= List.Nil[A]()
         items.foreach(elem=>append(list, Cons(elem, Nil())))
         list;
       }
 
-      def nil[A]: List[A] = Nil() // smart constructor
+      def toStream[A](list: List[A]): Stream[A] = list match {
+        case Cons(h,t) => Stream.cons(h, toStream(t))
+        case _ => Stream.empty()
+      }
 
       def sum(l: List[Int]): Int = l match {
         case Cons(h, t) => h + sum(t)
